@@ -35,9 +35,9 @@ La arquitectura general, las decisiones de diseño y el código base del proyect
 
 ## ¿Ya existe algo así?
 
-Antes de este proyecto busqué si había herramientas similares, principalmente para no reinventar la rueda innecesariamente. Encontré varias alternativas ya existentes, cada una con un enfoque distinto:
+Antes de este proyecto busqué si había herramientas similares, hay varias alternativas ya existentes, cada una con un enfoque distinto:
 
-- **[dunkmann00/Drive-Backup](https://github.com/dunkmann00/Drive-Backup)** — probablemente la más similar en espíritu: respalda Google Drive localmente, con binarios precompilados y opción de usar credenciales propias.
+- **[dunkmann00/Drive-Backup](https://github.com/dunkmann00/Drive-Backup)** — probablemente la más similar: respalda Google Drive localmente, con binarios precompilados y opción de usar credenciales propias (pero todo desde el cmd).
 - **[Teidesat/GDrive-Backup](https://github.com/Teidesat/GDrive-Backup)** — mantiene una copia local de Drive con historial de revisiones para archivos modificados/eliminados.
 - **[saurabh9651/sync_with_google_drive_api](https://github.com/saurabh9651/sync_with_google_drive_api)** — script simple para subir una carpeta local a una carpeta específica de Drive.
 - **[vikynandha-zz/google-drive-backup](https://github.com/vikynandha-zz/google-drive-backup)** — script de sincronización con opciones de línea de comandos.
@@ -48,8 +48,6 @@ Ninguna de estas es una copia 1:1 de este proyecto (la combinación de GUI en Qt
 ---
 
 ## Cómo usar la aplicación (usuarios)
-
-Google exige que cada aplicación que use su API tenga sus propias credenciales — por eso no se puede distribuir un `credentials.json` genérico dentro del `.exe`. Cada usuario debe generar el suyo siguiendo estos pasos (toma unos 5-10 minutos, se hace una sola vez).
 
 ### 1. Crear un proyecto en Google Cloud Console
 
@@ -151,12 +149,6 @@ pyinstaller --onefile --windowed --icon=icon.ico --add-data "icon.ico;." main.py
 > En macOS/Linux, reemplaza el `;` del `--add-data` por `:` (ej. `"icon.ico:."`).
 
 Esto genera el ejecutable dentro de la carpeta `dist/`.
-
-### 6. Configurar el ejecutable compilado
-
-1. Copia el `.exe` generado en `dist/` a la carpeta donde quieras usar la aplicación.
-2. Sigue los pasos de la sección **"Cómo usar la aplicación"** (crear proyecto en Google Cloud Console, habilitar la API, generar `credentials.json`) y coloca ese archivo junto al `.exe` recién compilado.
-3. Abre el `.exe` y autoriza el acceso a tu cuenta cuando se te pida.
 
 De esta forma, compilas la app tú mismo desde el código fuente público, sin depender de ningún binario que no hayas generado con tus propias manos — y usando siempre tus propias credenciales de Google, nunca compartidas con nadie más.
 
