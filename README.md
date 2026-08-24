@@ -26,11 +26,11 @@ Este proyecto fue desarrollado con la asistencia de modelos de lenguaje de IA co
 
 - Depurar problemas específicos de layouts y comportamiento de Qt/PySide6.
 - Manejo de creacion de dialogos de Qt/PySide6.
-- Manejo y de la API de Google y soluciones de errores.
+- Manejo de la API de Google y correcciones de errores.
 - Optimizar el rendimiento de las operaciones de subida/descarga (paralelismo con hilos).
 - Redactar y estructurar este mismo README.
 
-La arquitectura general, las decisiones de diseño y el código base del proyecto son de mi autoría; la IA se usó como herramienta de consulta y depuración puntual, no para generar el proyecto de punta a punta sin supervisión. Se documenta esto por transparencia.
+La arquitectura general, las decisiones de diseño y el código base del proyecto son propias; la IA se usó como herramienta de consulta y depuración puntual, no para generar el proyecto de punta a punta sin supervisión. Se documenta esto por transparencia.
 
 ---
 
