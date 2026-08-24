@@ -25,7 +25,8 @@ Aplicación de escritorio hecha en **Python + PySide6 (Qt)** para respaldar carp
 Este proyecto fue desarrollado con la asistencia de modelos de lenguaje de IA como herramienta de apoyo durante el desarrollo, concretamente **Claude (Anthropic)** y **ChatGPT (OpenAI)**. usados para:
 
 - Depurar problemas específicos de layouts y comportamiento de Qt/PySide6.
-- Resolver manejo de errores de autenticación con la API de Google.
+- Manejo de creacion de dialogos de Qt/PySide6.
+- Manejo y de la API de Google y soluciones de errores.
 - Optimizar el rendimiento de las operaciones de subida/descarga (paralelismo con hilos).
 - Redactar y estructurar este mismo README.
 
@@ -43,11 +44,21 @@ Antes de este proyecto busqué si había herramientas similares, hay varias alte
 - **[vikynandha-zz/google-drive-backup](https://github.com/vikynandha-zz/google-drive-backup)** — script de sincronización con opciones de línea de comandos.
 - **[bachvtuan/Backup-To-Google-Drive](https://github.com/bachvtuan/Backup-To-Google-Drive)** — enfocado en backups automatizados de bases de datos vía cron/crontab.
 
-Ninguna de estas es una copia 1:1 de este proyecto (la combinación de GUI en Qt, selección visual de carpetas incluidas/excluidas, paralelismo pensado para decenas de miles de archivos, y limpieza dirigida de carpetas vacías no la vi replicada exactamente en ninguna), pero vale la pena revisarlas si buscas alternativas ya maduras o con más tiempo de desarrollo encima.
+Ninguna de estas es una copia 1:1 de este proyecto (GUI en Qt, selección visual de carpetas incluidas/excluidas, paralelismo y limpieza dirigida de carpetas vacías), pero vale la pena revisarlas si buscas alternativas ya maduras o con más tiempo de desarrollo encima.
 
 ---
 
 ## Cómo usar la aplicación (usuarios)
+
+### ¿Por qué tengo que crear mi propio proyecto en Google Cloud?
+
+Puede parecer un paso tedioso, pero tiene una razón concreta: esta aplicación corre completamente en tu propio computador y se comunica directamente con Google Drive, sin utilizar un servidor externo para almacenar o procesar tus archivos.
+
+Para conectarse a Google Drive mediante OAuth, la aplicación necesita identificarse ante los servidores de Google. Para las aplicaciones de escritorio, Google requiere crear un cliente OAuth 2.0 en un proyecto de Google Cloud y descargar sus credenciales como 'credentials.json'.
+
+Este archivo no contiene tus credenciales de Google ni da acceso directo a tu Drive. Durante el primer inicio de sesión, Google te muestra qué permisos solicita la aplicación y, una vez que autorizas el acceso, se genera el token que la aplicación utiliza para realizar las operaciones permitidas.
+
+Por eso debes crear o proporcionar las credenciales de OAuth para esta aplicación. Es un proceso que se realiza una sola vez.
 
 ### 1. Crear un proyecto en Google Cloud Console
 
@@ -71,6 +82,18 @@ Ninguna de estas es una copia 1:1 de este proyecto (la combinación de GUI en Qt
 6. Haz clic en **Crear/Create**. No es necesario agregar scopes manualmente en este paso.
 
 > **Nota:** como la app queda en modo de prueba ("Testing"), Google puede advertirte que la app "no está verificada" al iniciar sesión. Esto es normal para uso personal — haz clic en **Avanzado → Ir a [nombre de tu app] (no seguro)** para continuar. Es tu propio proyecto, con tus propias credenciales, así que es seguro.
+
+#### Agregar usuarios de prueba (importante)
+
+Mientras tu app esté en modo **"Testing"** (que es el estado por defecto y en el que se queda a menos que la envíes a verificación de Google, algo innecesario para uso personal), **solo las cuentas de Google que agregues explícitamente como usuarios de prueba podrán iniciar sesión** — cualquier otra cuenta, aunque sea tuya, va a recibir un error de acceso denegado al intentar autorizar la app.
+
+Para agregar las cuentas que necesitas que funcionen:
+
+1. Ve a **Menú ☰ → Google Auth Platform → Audience** (o [ve directo aquí](https://console.cloud.google.com/auth/audience)).
+2. Baja hasta la sección **Test users**.
+3. Haz clic en **Add users**.
+4. Ingresa el correo (o correos) de Gmail de cada cuenta que vaya a usar la aplicación.
+5. Guarda los cambios.
 
 ### 4. Crear las credenciales (OAuth Client ID)
 
