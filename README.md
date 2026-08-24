@@ -141,11 +141,15 @@ Se recomienda usar un entorno virtual, aunque no es obligatorio:
 python -m venv venv
 venv\Scripts\activate        # en Windows
 # source venv/bin/activate   # en macOS/Linux
+```
 
+luego:
+
+```bash
 pip install -r requirements.txt
 ```
 
-Si el proyecto no incluye `requirements.txt`, instala manualmente:
+o instala manualmente:
 
 ```bash
 pip install PySide6 google-api-python-client google-auth-httplib2 google-auth-oauthlib pyinstaller
@@ -166,10 +170,8 @@ Sigue la sección **"Cómo usar la aplicación"** de más arriba para generar tu
 Desde la carpeta del proyecto, con el entorno virtual activado:
 
 ```bash
-pyinstaller --onefile --windowed --icon=icon.ico --add-data "icon.ico;." main.py
+pyinstaller main.spec
 ```
-
-> En macOS/Linux, reemplaza el `;` del `--add-data` por `:` (ej. `"icon.ico:."`).
 
 Esto genera el ejecutable dentro de la carpeta `dist/`.
 
@@ -178,7 +180,7 @@ De esta forma, compilas la app tú mismo desde el código fuente público, sin d
 ---
 
 ## Estructura de archivos relevante (junto al `.exe` o al `main.py`)
-
+ 
 | Archivo | Descripción | ¿Se incluye en el repo? |
 |---|---|---|
 | `credentials.json` | Credenciales OAuth de tu propio proyecto de Google Cloud. Cada usuario genera el suyo. | No |
@@ -186,3 +188,5 @@ De esta forma, compilas la app tú mismo desde el código fuente público, sin d
 | `backup_info.json` | Carpetas incluidas/excluidas y datos internos de carpetas de Drive. Se genera/edita desde la app. | No |
 | `backup_data.json` | Historial de archivos ya respaldados, usado para detectar cambios. Se genera automáticamente. | No |
 | `icon.ico` | Ícono de la aplicación. | Sí |
+| `main.spec` | Configuración de PyInstaller para compilar el `.exe`. | Sí |
+| `requirements.txt` | Dependencias de Python necesarias para correr la app. | Sí |
