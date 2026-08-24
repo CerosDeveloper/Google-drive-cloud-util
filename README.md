@@ -25,7 +25,7 @@ Aplicación de escritorio hecha en **Python + PySide6 (Qt)** para respaldar carp
 Este proyecto fue desarrollado con la asistencia de modelos de lenguaje de IA como herramienta de apoyo durante el desarrollo, concretamente **Claude (Anthropic)** y **ChatGPT (OpenAI)**. usados para:
 
 - Depurar problemas específicos de layouts y comportamiento de Qt/PySide6.
-- Manejo de creacion de dialogos de Qt/PySide6.
+- Manejo y creacion de dialogos de Qt/PySide6.
 - Manejo de la API de Google y correcciones de errores.
 - Optimizar el rendimiento de las operaciones de subida/descarga (paralelismo con hilos).
 - Redactar y estructurar este mismo README.
